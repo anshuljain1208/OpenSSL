@@ -13,7 +13,10 @@ Pod::Spec.new do |s|
                 }
     s.author             = { "$(git config user.name)" => "$(git config user.email)" }
     s.source       = { :git => "$HOME/MyFrameworkDistribution.git", :tag => "#{s.version}" }
-    s.vendored_frameworks = "openssl.xcframework"
+    s.spec.vendored_libraries = "libcrypto.a" , "libcrypto-sim.a"
     s.platform = :ios
     s.ios.deployment_target  = '12.0'
+    s.user_target_xcconfig = {
+      'LIBRARY_SEARCH_PATHS' => '"\$(PODS_ROOT)/OpenSSL/"'
+    }
 end
